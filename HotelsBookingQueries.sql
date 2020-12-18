@@ -10,20 +10,27 @@ WHERE Hotels.Name LIKE 'Lero'
 ORDER BY Rooms.Number ASC;
 
 
--- 2) Dohvatiti sve sobe u svim hotelima kojima broj poèinje sa brojem 1
-SELECT * FROM Rooms 
+-- 2) Dohvatiti sve sobe u svim hotelima kojima broj pocinje sa brojem 1
+SELECT 
+	Rooms.Number,
+	Rooms.Capacity,
+	Rooms.PricePerNight,
+	CASE WHEN Rooms.TvAvailable = 1 THEN 'Yes' ELSE 'No' END AS 'TV Available',
+	Hotels.[Name] AS 'Hotel name'
+FROM Rooms 
+LEFT JOIN Hotels ON Rooms.HotelId = Hotels.Id
 WHERE Rooms.Number LIKE '1%';
 
 
--- 3) Dohvatiti samo ime i prezime svih èistaèica u odreðenom hotelu
-SELECT FirstName, LastName, Hotels.Name, Employees.Role
+-- 3) Dohvatiti samo ime i prezime svih cistacica u odreðenom hotelu
+SELECT FirstName, LastName, Hotels.[Name] AS 'Hotel name', Employees.[Role] AS 'Employee role'
 FROM Users
 INNER JOIN Employees ON (Users.Id = Employees.Id)
 INNER JOIN HotelEmployees ON (Employees.Id = HotelEmployees.EmployeeId)
 INNER JOIN Hotels ON (HotelEmployees.HotelId = Hotels.Id)
 WHERE 
 	(Hotels.Name LIKE 'Oboa' OR Hotels.Name LIKE 'Lero' OR Hotels.Name LIKE 'Ganz gross hotel')
-	AND Employees.Role IN ('Èistaæ', 'Èistaæica');
+	AND Employees.Role IN ('Cistac', 'Cistacica');
 
 
 -- 4) Dohvatiti kupnje od 1.12.2020. koje prelaze cijenu od 1000
@@ -43,7 +50,7 @@ WHERE
 	AND Appointments.EndTime >= GETDATE();
 
 	
--- DOKAZ ZA 6. ZADATAK => prije delete komande
+-- Proof of concept for task 6. => pre-delete command execution
 SELECT * FROM Appointments
 WHERE Appointments.CreatedAt <= '2020-01-01';
 
@@ -51,12 +58,12 @@ WHERE Appointments.CreatedAt <= '2020-01-01';
 DELETE FROM Appointments
 WHERE Appointments.CreatedAt <= '2020-01-01';
 
--- DOKAZ ZA 6. ZADATAK => poslije delete komande
+-- Proof of concept for task 6. => pre-delete command execution
 SELECT * FROM Appointments
 WHERE Appointments.CreatedAt <= '2020-01-01';
 
 
--- DOKAZ ZA 7. ZADATAK => sve sobe sa kapacitetima 3 ili 4 prije update komande
+-- Proof of concept for task 7. => pre-update command execution, all rooms with 3 and 4 capacity
 SELECT * FROM Rooms
 WHERE Capacity IN (3, 4)
 
@@ -71,21 +78,37 @@ UPDATE OrderedRooms
 SET Capacity = 4
 WHERE RowNumber = 2;
 
--- DOKAZ ZA 7. ZADATAK => sve sobe sa kapacitetima 3 ili 4 poslije update komande
+-- Proof of concept for task 7. => post-update command execution, all rooms with 3 and 4 capacity
 SELECT * FROM Rooms
 WHERE Capacity IN (3, 4)
 
 
 -- 8) Dohvatiti povijesni pregled boravaka odreðene sobe, poredano po vremenu boravka
-SELECT * FROM Appointments
+SELECT 
+	Appointments.StartTime AS 'Appointment start time',
+	Appointments.EndTime AS 'Appointment end time',
+	Appointments.CreatedAt AS 'Appointment creation time',
+	Appointments.ServiceType AS 'Service type',
+	Users.FirstName AS 'Buyers name',
+	Users.LastName AS 'Buyers last name',
+	Users.Email AS 'Buyers mail'
+FROM Appointments
 LEFT JOIN RoomAppointments ON Appointments.Id = RoomAppointments.AppointmentId
 LEFT JOIN Rooms ON RoomAppointments.RoomId = Rooms.Id
+LEFT JOIN Buyers ON Appointments.BuyerId = Buyers.Id
+LEFT JOIN Users ON Buyers.Id = Users.Id
 WHERE Rooms.Id = 2
-ORDER BY Appointments.StartTime ASC;
+ORDER BY Appointments.StartTime, Appointments.EndTime;
 
 
 -- 9) Dohvatiti sve boravke koji su bili ili pansion ili polupansion, i to samo u odreðenom hotelu
-SELECT StartTime AS 'Appointment start', EndTime AS 'Appointment ends', ServiceType, Number AS 'Room number', Category, PricePerNight AS 'Price per night', [Name] AS 'Hotel name'
+SELECT 
+	StartTime AS 'Poèetak rezervacije',
+	EndTime AS 'Kraj rezervacije',
+	ServiceType,
+	Number AS 'Broj sobe',
+	Category, PricePerNight AS 'Cijena noæenja',
+	[Name] AS 'Ime hotela'
 FROM Appointments
 LEFT JOIN RoomAppointments ON Appointments.Id = RoomAppointments.AppointmentId
 LEFT JOIN Rooms ON RoomAppointments.RoomId = Rooms.Id
@@ -94,10 +117,10 @@ WHERE (Appointments.ServiceType LIKE 'Pansion' OR Appointments.ServiceType LIKE 
 	AND Hotels.Name LIKE 'Lero';
 
 
--- DOKAZ ZA 10. => PRIJE UPDATE KOMANDE
+-- Proof of concept for task 10. => pre-update command execution
 SELECT * FROM Users
 INNER JOIN Employees On Users.Id = Employees.Id
-WHERE Employees.[Role] LIKE 'Èistaæ%';
+WHERE Employees.[Role] LIKE 'Cistac%';
 
 -- 10) Promovirati 2 zaposlenika sobne posluge u recepcioniste
 WITH Cleaners AS
@@ -105,12 +128,12 @@ WITH Cleaners AS
 	SELECT Users.Id, FirstName, LastName, PersonalIdNumber, Email, DateOfBirth, [Role] 
 	FROM Users
 	INNER JOIN Employees On Users.Id = Employees.Id
-	WHERE Employees.[Role] IN ('Èistaæ', 'Èistaæica')
+	WHERE Employees.[Role] IN ('Cistac', 'Cistacica')
 )
 UPDATE Cleaners
 SET [Role] = 'Recepcionist';
 
--- DOKAZ ZA 10. => POSLIJE UPDATE KOMANDE
+-- Proof of concept for task 10. => post-update command execution
 SELECT * FROM Users
 INNER JOIN Employees On Users.Id = Employees.Id
 WHERE Employees.[Role] LIKE 'Recepcionist';

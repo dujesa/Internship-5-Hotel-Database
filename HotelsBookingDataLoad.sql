@@ -4,36 +4,36 @@ USE HotelsBooking
 
 -- Prvi blok popunjavanja
 INSERT INTO Users(FirstName, LastName, PersonalIdNumber, Email, DateOfBirth) VALUES
-('Marin', 'Mariniæ', '01234567', 'mmarinic@gmail.com', '1990-01-30'),
-('Luka', 'Lukiæ', '12345678', 'llukic@gmail.com', '1980-03-01'),
-('Petar', 'Petroviæ', '23456789', 'ppetrovic@gmail.com', '1995-12-28'),
-('Ana', 'Aniæ', '34567890', 'aanic@gmail.com', '1985-02-12'),
-('Lucija', 'Luèiæ', '45678901', 'llucic@gmail.com', '1992-09-10'),
-('Marina', 'Maroviæ', '56789012', 'mmarovic@gmail.com', '2000-01-04'),
-('Stipe', 'Stipaè', '67890123', 'sstipac@gmail.com', '1976-03-01'),
-('Antun', 'Tuniæ', '78901234', 'atunic@gmail.com', '1995-12-28'),
-('Petra', 'Trapetiæ', '89012345', 'ptrapetic@gmail.com', '1985-02-02'),
-('Mira', 'Miriæ', '90123456', 'mmiric@gmail.com', '1999-09-12'),
-('Sara', 'Sariæ', '00001111', 'ssaric@gmail.com', '1994-03-20'),
+('Marin', 'Marinic', '01234567', 'mmarinic@gmail.com', '1990-01-30'),
+('Luka', 'Lukic', '12345678', 'llukic@gmail.com', '1980-03-01'),
+('Petar', 'Petrovic', '23456789', 'ppetrovic@gmail.com', '1995-12-28'),
+('Ana', 'Anic', '34567890', 'aanic@gmail.com', '1985-02-12'),
+('Lucija', 'Lucic', '45678901', 'llucic@gmail.com', '1992-09-10'),
+('Marina', 'Marovic', '56789012', 'mmarovic@gmail.com', '2000-01-04'),
+('Stipe', 'Stipac', '67890123', 'sstipac@gmail.com', '1976-03-01'),
+('Antun', 'Tunic', '78901234', 'atunic@gmail.com', '1995-12-28'),
+('Petra', 'Trapetic', '89012345', 'ptrapetic@gmail.com', '1985-02-02'),
+('Mira', 'Miric', '90123456', 'mmiric@gmail.com', '1999-09-12'),
+('Sara', 'Saric', '00001111', 'ssaric@gmail.com', '1994-03-20'),
 ('Vicko', 'Vickovic', '11110000', 'vvicko@gmail.com', '1966-06-03'),
-('Ivo', 'Iviæ', '00002222', 'ivo@gmail.com', '2001-12-08'),
-('Lu', 'Luèiæ', '22220000', 'lulucic@gmail.com', '1984-02-11'),
-('Antonia', 'Tonkoviæ', '00112233', 'atonko@gmail.com', '2005-02-12'),
-('Mirna', 'Mirniæ', '01012020', 'mirna@gmail.com', '1972-05-12'),
+('Ivo', 'Ivic', '00002222', 'ivo@gmail.com', '2001-12-08'),
+('Lu', 'Lucic', '22220000', 'lulucic@gmail.com', '1984-02-11'),
+('Antonia', 'Tonkovic', '00112233', 'atonko@gmail.com', '2005-02-12'),
+('Mirna', 'Mirnic', '01012020', 'mirna@gmail.com', '1972-05-12'),
 ('Marijana', 'Marijanic', '1122112211', 'marijana@gmail.com', '1973-12-12'),
-('Ljiljana', 'Ljiljaniæ', '99999999', 'ljiljan@gmail.com', '2000-01-01'),
-('Davor', 'Davorèeviæ', '55555555', 'ddavor@gmail.com', '1966-06-02'),
+('Ljiljana', 'Ljiljanic', '99999999', 'ljiljan@gmail.com', '2000-01-01'),
+('Davor', 'Davorcevic', '55555555', 'ddavor@gmail.com', '1966-06-02'),
 ('Dante', 'Alighieri', '767676767', 'dante@gmail.com', '1996-05-20')
 
 INSERT INTO Employees(Id, [Role]) VALUES
-(1, 'Èistaæ'),
+(1, 'Cistac'),
 (2, 'Domar'),
 (3, 'Portir'),
 (4, 'Kuhar'),
 (5, 'Sobarica'),
-(6, 'Èistaæica'),
-(7, 'Èistaæ'),
-(8, 'Vozaè')
+(6, 'Cistacica'),
+(7, 'Cistac'),
+(8, 'Vozac')
 
 INSERT INTO Guests(Id) VALUES
 (9),
@@ -56,12 +56,12 @@ INSERT INTO Cities ([Name], ZipCode, Country) VALUES
 ('Split', '21000', 'Hrvatska'),
 ('Zagreb', '10000', 'Hrvatska'),
 ('Dubrovnik', '20000', 'Hrvatska'),
-('Munchen', '80331', 'Njemaèka'),
+('Munchen', '80331', 'Njemacka'),
 ('Lisabon', '10004', 'Portugal')
 
 -- Drugi blok popunjavanja
 INSERT INTO Hotels([Name], StreetAddress, CityId) VALUES
-('FESB Hotel', 'Ruðera Boškoviæa 21', 1),
+('FESB Hotel', 'Ruðera Boškovica 21', 1),
 ('Lero', 'Vlahe Bukovca 3', 3),
 ('Ganz gross hotel', 'Kurt Landauer Strasse', 4),
 ('Atrium', 'Mike Tripala 2', 1),
@@ -71,13 +71,13 @@ INSERT INTO Appointments(StartTime, EndTime, ServiceType, BuyerId) VALUES
 ('2020-12-21 13:00', '2020-12-28 09:00', 'Pansion', 9),
 ('2021-01-01 15:00', '2021-01-05 09:00', 'Pansion', 9),
 ('2020-12-15 12:00', '2020-12-29 07:45', 'Polupansion', 14),
-('2021-01-21 13:00', '2021-01-22 09:00', 'Obièan boravak', 14),
+('2021-01-21 13:00', '2021-01-22 09:00', 'Obican boravak', 14),
 ('2019-10-11 14:00', '2020-03-12 08:00', 'Pansion', 14),
-('2019-10-13 15:30', '2012-10-15 09:00', 'Obièan boravak', 16),
+('2019-10-13 15:30', '2012-10-15 09:00', 'Obican boravak', 16),
 ('2021-12-21 14:30', '2022-12-28 05:30', 'Pansion', 14),
 ('2022-01-01 12:30', '2022-01-05 12:30', 'Pansion', 14),
 ('2020-11-11 01:30', '2021-12-29 14:45', 'Polupansion', 9),
-('2021-12-20 12:30', '2022-01-22 10:30', 'Obièan boravak', 14),
+('2021-12-20 12:30', '2022-01-22 10:30', 'Obican boravak', 14),
 ('2019-08-07 12:00', '2019-08-12 17:30', 'Pansion', 14)
 
 INSERT INTO Appointments(CreatedAt, StartTime, EndTime, ServiceType, BuyerId) VALUES

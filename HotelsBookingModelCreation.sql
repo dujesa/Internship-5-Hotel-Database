@@ -47,7 +47,7 @@ CREATE TABLE Appointments(
 	CreatedAt datetime2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	StartTime datetime2 NOT NULL,
 	EndTime datetime2 NOT NULL,
-	ServiceType nvarchar(15) CHECK(ServiceType in ('Obièan boravak', 'Polupansion', 'Pansion')),
+	ServiceType nvarchar(15) CHECK(ServiceType in ('Obican boravak', 'Polupansion', 'Pansion')),
 	BuyerId int FOREIGN KEY REFERENCES Buyers(Id) NOT NULL
 );
 
